@@ -4,7 +4,7 @@ with payments as (
          orderid as order_id,
          paymentmethod as payment_method,
          status,
-         amount,
+         {{cents_to_dollar('amount')}} as amount,
          created as created_date
     /*from raw.stripe.payment*/
     from {{ source('stripe','payment')}}
