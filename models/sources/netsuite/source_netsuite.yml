@@ -1,0 +1,17 @@
+version: 2
+
+sources:
+    - name: netsuite
+      description: Netsuite SuiteAnalytics connector data
+      database: |
+          "{{target.name}}_RAW"     
+      schema: FIVETRAN_NETSUITE
+      tables:
+        - name: accounts
+        - name: accounting_periods        
+        - name: entity
+        - name: items
+        - name: transaction_lines
+        - name: transactions
+        - name: product_family
+        - name: units_type

@@ -1,0 +1,78 @@
+version: 2
+
+models:
+    - name: netsuite_accounting_periods_source
+      description: Accounting period data from Netsuite to inform dates and financial calendar.
+      columns:
+        - name: accounting_period_id
+          description: Id for the period
+          tests:
+            - dbt_expectations.expect_column_values_to_not_be_null
+            - dbt_expectations.expect_column_values_to_be_unique
+        - name: accounting_period_name
+          description: String name for period from Netsuite
+          tests:
+            - dbt_expectations.expect_column_values_to_not_be_null
+        - name: accounting_period_start_date
+          description: Start date for the period
+        - name: accounting_period_end_date
+          description: End date for the period
+        - name: fiscal_year
+          description: The fiscal year 
+          tests:
+            - dbt_expectations.expect_column_values_to_not_be_null
+            - dbt_expectations.expect_column_value_lengths_to_equal:
+                value: 4
+                row_condition: "fiscal year is not null" # (Optional)
+        - name: is_quarter
+          description: Boolean for quarter period
+          tests:
+            - dbt_expectations.expect_column_values_to_not_be_null
+        - name: is_year
+          description: Boolean for year period
+          tests:
+            - dbt_expectations.expect_column_values_to_not_be_null
+        - name: is_adjustment_period
+          description: Boolean for adjustment period - not used
+          tests:
+            - dbt_expectations.expect_column_values_to_not_be_null
+    - name: netsuite_account_source
+      description: Source layer for Netsuite accounts
+      columns:
+        - name: account_id
+          description: Primary key
+          tests:
+            - dbt_expectations.expect_column_values_to_not_be_null
+        - name: parent_id
+          description: Hierarchy for table
+        - name: account_type
+          description: Account type
+        - name: account_name
+          description: Account name string
+          tests:
+            - dbt_expectations.expect_column_values_to_not_be_null
+        - name: account_full_name
+          description: Account full path
+          tests:
+            - dbt_expectations.expect_column_values_to_not_be_null
+        - name: account_number
+          description: Account number
+          tests:
+            - dbt_expectations.expect_column_values_to_not_be_null
+        - name: open_balance
+          description: Open balance
+        - name: is_leftside_account
+          description: Boolean 
+    - name: netsuite_entity_source
+      description: Netsuite entity entries
+      columns:
+        - name: entity_id
+          description: Entity primary key
+          tests:
+            - dbt_expectations.expect_column_values_to_not_be_null
+        - name: entity_name
+          description: Entity name
+          tests:
+            - dbt_expectations.expect_column_values_to_not_be_null
+        - name: entity_full_name
+        - name: entity_linked_salesforce_account_id
