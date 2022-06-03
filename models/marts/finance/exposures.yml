@@ -1,0 +1,23 @@
+version: 2
+exposures:
+  
+  - name: revenue_dashboard    
+    type: dashboard        
+    maturity: high
+    description: >
+      Enterprise-wide Revenue Dashboard for top Revenue KPIs and trends
+    
+    tags:
+        - finance
+    depends_on:
+      - ref('dim_revenue_customer')
+      - ref('dim_product')
+      - ref('dim_territory')
+      - ref('bdg_customer_hierarchy')
+      - ref('bdg_territory_customer')
+      - ref('dim_revenue_transaction_date')
+      - ref('fct_product_revenue_transaction')
+      
+    owner:
+        name: CriticalRiver Data Analytics Team
+        email: morpheuspoc@criticalriver.com

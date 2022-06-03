@@ -1,0 +1,12 @@
+version: 2
+
+sources:
+    - name: gsheets
+      description: Google Sheets connector data
+      database: |
+          "{{target.name}}_RAW"
+      schema: FIVETRAN_GSHEETS
+      tables:
+        - name: zipcodes
+        - name: exceptions
+          identifier: exceptions
