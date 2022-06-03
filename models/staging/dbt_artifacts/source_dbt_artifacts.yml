@@ -1,0 +1,11 @@
+version: 2
+
+sources:
+  - name: dbt_artifacts
+    database: raw
+    schema: dbt_artifacts
+    tables:
+      - name: artifacts
+      - name: dbt_manifest_nodes
+      - name: dbt_run_results
+      - name: dbt_run_results_nodes
