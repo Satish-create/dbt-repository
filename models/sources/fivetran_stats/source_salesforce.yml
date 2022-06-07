@@ -1,0 +1,16 @@
+version: 2
+
+sources:
+  - name: salesforce_stats
+    description: Salesforce Sales Cloud.
+    database: DA_TEAM_TEST_RAW
+      #database: |
+      #    "{{target.name}}_RAW"
+    schema: FIVETRAN_SALESFORCE
+    tables:
+      - name: fivetran_audit
+        columns:
+          - name: id
+            tests:
+              - unique
+              - notnull

@@ -3,9 +3,9 @@ version: 2
 sources:
     - name: salesforce
       description: Salesforce Sales Cloud.
-      #database: CR_DATATEAM_RAW
-      database: |
-          "{{target.name}}_RAW"
+      database: DA_TEAM_TEST_RAW
+      #database: |
+      #    "{{target.name}}_RAW"
       schema: FIVETRAN_SALESFORCE
       tables:
         # - name: order
@@ -28,3 +28,6 @@ sources:
 #            warn_after: {count: 5, period: day}
 #            error_after: {count: 10, period: day}
 #        - name: user_role
+      #schema: FIVETRAN_LOG_SCHEMA
+      #tables:
+        #- name: fivetran_audit

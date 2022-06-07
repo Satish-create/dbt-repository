@@ -3,8 +3,9 @@ version: 2
 sources:
     - name: gsheets
       description: Google Sheets connector data
-      database: |
-          "{{target.name}}_RAW"
+      database: DA_TEAM_TEST_RAW
+      #database: |
+      #    "{{target.name}}_RAW"
       schema: FIVETRAN_GSHEETS
       tables:
         - name: zipcodes
