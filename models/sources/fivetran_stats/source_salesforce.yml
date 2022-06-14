@@ -20,7 +20,7 @@ sources:
           - name: id
             tests:
               - unique
-              - notnull
+              - not_null
               
   - name: netsuite_stats
     description: Netsuite data Cloud.
@@ -30,11 +30,6 @@ sources:
     schema: FIVETRAN_NETSUITE
     tables:
       - name: fivetran_audit
-        columns:
-          - name: id
-            tests:
-              - unique
-              - notnull
 
   - name: gsheets_stats
     description: Gsheets data Cloud.
@@ -48,4 +43,4 @@ sources:
           - name: id
             tests:
               - unique
-              - notnull
+              - not_null
