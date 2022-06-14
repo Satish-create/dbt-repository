@@ -1,12 +1,47 @@
 version: 2
 
 sources:
+  - name: fivetran_connector
+    description: It will have the connector details of sources through Fivetran.
+    database: DA_TEAM_TEST_RAW
+    schema: FIVETRAN_LOG_SCHEMA
+    tables:
+      - name: CONNECTOR
+
   - name: salesforce_stats
     description: Salesforce Sales Cloud.
     database: DA_TEAM_TEST_RAW
       #database: |
       #    "{{target.name}}_RAW"
     schema: FIVETRAN_SALESFORCE
+    tables:
+      - name: fivetran_audit
+        columns:
+          - name: id
+            tests:
+              - unique
+              - notnull
+              
+  - name: netsuite_stats
+    description: Netsuite data Cloud.
+    database: DA_TEAM_TEST_RAW
+      #database: |
+      #    "{{target.name}}_RAW"
+    schema: FIVETRAN_NETSUITE
+    tables:
+      - name: fivetran_audit
+        columns:
+          - name: id
+            tests:
+              - unique
+              - notnull
+
+  - name: gsheets_stats
+    description: Gsheets data Cloud.
+    database: DA_TEAM_TEST_RAW
+      #database: |
+      #    "{{target.name}}_RAW"
+    schema: FIVETRAN_GSHEETS
     tables:
       - name: fivetran_audit
         columns:

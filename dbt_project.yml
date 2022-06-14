@@ -24,6 +24,11 @@ clean-targets:         # directories to be removed by `dbt clean`
   - "target"
   - "dbt_packages"
 
+#snowflake_spend:
+#  enabled: true
+
+
+
 vars:
   cr_package:
     dim_attribute_unknown_string: 'Unknown'
@@ -71,6 +76,9 @@ models:
       fivetran_stats:
         +database: DA_TEAM_TEST_STAGE
         +schema: FIVETRAN_STAGE
+      snowflake_stats:
+        +database: DA_TEAM_TEST_STAGE
+        +schema: snowflake_STAGE
     staging:
       common:
         +database: DA_TEAM_TEST_STAGE
@@ -87,6 +95,9 @@ models:
       fivetran_stats:
         +database: DA_TEAM_TEST_STAGE
         +schema: FIVETRAN_STAGE
+      snowflake_stats:
+        +database: DA_TEAM_TEST_STAGE
+        +schema: SNOWFLAKE_STAGE
     marts:
       common:
         +materialized: table
@@ -94,7 +105,11 @@ models:
       finance:
         +materialized: table
         +schema: FINANCE
-      fivetan_stats:
+      fivetran_stats:
         +materialized: table
         +database: DA_TEAM_TEST_AUDIT
         +schema: FIVETRAN_AUDIT
+      snowflake_stats:
+        +materialized: table
+        +database: DA_TEAM_TEST_AUDIT
+        +schema: SNOWFLAKE_AUDIT
