@@ -1,8 +1,7 @@
-
 # Name your project! Project names should contain only lowercase characters
 # and underscores. A good package name should reflect your organization's
 # name or the intended use of these models
-name: 'my_new_project'
+name: 'cr_package'
 version: '1.0.0'
 config-version: 2
 
@@ -13,9 +12,10 @@ profile: 'default'
 # The `source-paths` config, for example, states that models in this project can be
 # found in the "models/" directory. You probably won't need to change these!
 model-paths: ["models"]
-analysis-paths: ["analyses"]
+analysis-paths: ["analysis"]
 test-paths: ["tests"]
 seed-paths: ["seeds"]
+#data-paths: ["seeds"]
 macro-paths: ["macros"]
 snapshot-paths: ["snapshots"]
 
@@ -24,6 +24,24 @@ clean-targets:         # directories to be removed by `dbt clean`
   - "target"
   - "dbt_packages"
 
+#snowflake_spend:
+#  enabled: true
+
+
+
+vars:
+  cr_package:
+    dim_attribute_unknown_string: 'Unknown'
+    dim_attribute_unknown_country: 'US'
+    dim_attribute_unknown_territory_code: 'TERRITORY_UNKNOWN'  
+    dim_attribute_unknown_territory_id: ''  
+    # The `mask_column` variable will be used to mask few columns as per model logic
+    mask_column: 'false'
+    mask_data: 'true'  # Make it to true to convert hash value to meaningful name as per the lookup table data.
+    mask_domain_name : common 
+    'dbt_date:time_zone': 'America/Los_Angeles'
+  dbt_artifacts:
+    dbt_artifacts_database: DA_TEAM_TEST_AUDIT    
 
 # Configuring models
 # Full documentation: https://docs.getdbt.com/docs/configuring-models
@@ -31,8 +49,67 @@ clean-targets:         # directories to be removed by `dbt clean`
 # In this example config, we tell dbt to build all models in the example/ directory
 # as tables. These settings can be overridden in the individual model files
 # using the `{{ config(...) }}` macro.
+seeds:
+  cr_package:
+    +database: DA_TEAM_TEST_STAGE
+    +schema: COMMON
 models:
-  my_new_project:
-    # Applies to all files under models/example/
-    example:
-      materialized: view
+  dbt_artifacts:
+    +database: DA_TEAM_TEST_AUDIT
+    +schema: DBT_AUDIT
+    staging:
+      +schema: DBT_STAGE
+  cr_package:
+    sources:
+      netsuite:
+        +database: DA_TEAM_TEST_STAGE
+        #+database: STAGE
+        +schema: NETSUITE
+      salesforce:
+        +database: DA_TEAM_TEST_STAGE
+        #+database: STAGE
+        +schema: SALESFORCE
+      gsheets:
+        +database: DA_TEAM_TEST_STAGE
+        #+database: STAGE
+        +schema: GSHEETS
+      fivetran_stats:
+        +database: DA_TEAM_TEST_STAGE
+        +schema: FIVETRAN_STAGE
+      snowflake_stats:
+        +database: DA_TEAM_TEST_STAGE
+        +schema: snowflake_STAGE
+    staging:
+      common:
+        +database: DA_TEAM_TEST_STAGE
+        #+database: STAGE
+        +schema: COMMON
+      prep:
+        +database: DA_TEAM_TEST_STAGE
+        #+database: STAGE
+        +schema: PREPARATION
+      mapping:
+        +database: DA_TEAM_TEST_STAGE
+        #+database: STAGE
+        +schema: COMMON
+      fivetran_stats:
+        +database: DA_TEAM_TEST_STAGE
+        +schema: FIVETRAN_STAGE
+      snowflake_stats:
+        +database: DA_TEAM_TEST_STAGE
+        +schema: SNOWFLAKE_STAGE
+    marts:
+      common:
+        +materialized: table
+        +schema: COMMON
+      finance:
+        +materialized: table
+        +schema: FINANCE
+      fivetran_stats:
+        +materialized: table
+        +database: DA_TEAM_TEST_AUDIT
+        +schema: FIVETRAN_AUDIT
+      snowflake_stats:
+        +materialized: table
+        +database: DA_TEAM_TEST_AUDIT
+        +schema: SNOWFLAKE_AUDIT
