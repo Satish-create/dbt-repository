@@ -1,7 +1,7 @@
 SELECT  warehouse_name,
-        sum(dollars_spent) as spend
+        sum(credits_used) as credits
 FROM  {{ref('snowflake_warehouse_metering_xf')}}
 WHERE usage_month = date_trunc('month', CURRENT_TIMESTAMP)::date
-  AND warehouse_name='COMPUTE_WH'
+  --AND warehouse_name='COMPUTE_WH'
 GROUP BY 1
 ORDER BY 1 DESC
