@@ -108,9 +108,9 @@ models:
             - dbt_expectations.expect_column_values_to_be_unique
         - name: user_name
           description: User name
-          tests:
-            - dbt_expectations.expect_column_values_to_not_be_null
-            - dbt_expectations.expect_column_values_to_be_unique
+          #tests:
+            #- dbt_expectations.expect_column_values_to_not_be_null
+            #- dbt_expectations.expect_column_values_to_be_unique
         - name: user_full_name
           description: User full name
         - name: user_email

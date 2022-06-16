@@ -19,11 +19,11 @@ models:
           description: End date for the period
         - name: fiscal_year
           description: The fiscal year 
-          tests:
-            - dbt_expectations.expect_column_values_to_not_be_null
-            - dbt_expectations.expect_column_value_lengths_to_equal:
-                value: 4
-                row_condition: "fiscal year is not null" # (Optional)
+          #tests:
+          #  - dbt_expectations.expect_column_values_to_not_be_null
+          #  - dbt_expectations.expect_column_value_lengths_to_equal:
+          #      value: 4
+          #      row_condition: "fiscal year is not null" # (Optional)
         - name: is_quarter
           description: Boolean for quarter period
           tests:
