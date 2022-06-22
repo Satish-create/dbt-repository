@@ -20,7 +20,7 @@ WITH base AS (
       DATE_TRUNC('day', end_time)::DATE            AS usage_day,
       DATEDIFF(hour, start_time, end_time)         AS usage_length,
       contract_rates.rate                          AS credit_rate,
-      --ROUND(credits_used * contract_rates.rate, 2) AS dollars_spent
+      round(credits_used * contract_rates.rate, 2) AS dollars_spent,
       credits_used
     FROM base
     LEFT JOIN contract_rates 
