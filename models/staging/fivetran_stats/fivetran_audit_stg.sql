@@ -30,8 +30,8 @@ with final_audit as (
           rows_updated_or_inserted,
           _FIVETRAN_SYNCED as sync_time
           
-        --from DA_TEAM_TEST_RAW.{{ connection }}.FIVETRAN_AUDIT
-        from {{ target.name }}_RAW.{{ connection }}.FIVETRAN_AUDIT
+        from DA_TEAM_TEST_RAW.{{ connection }}.FIVETRAN_AUDIT
+        --from {{ target.name }}_RAW.{{ connection }}.FIVETRAN_AUDIT
 
         {% if not loop.last %}
         UNION ALL
