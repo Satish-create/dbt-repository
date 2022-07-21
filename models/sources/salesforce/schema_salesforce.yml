@@ -33,11 +33,11 @@ models:
         - name: account_shipping_state
           description: Account shipping state
           tests:
-            #- dbt_expectations.expect_column_values_to_not_be_null
+            - dbt_expectations.expect_column_values_to_not_be_null
         - name: account_shipping_postal_code
           description: Account shipping postal code
           tests:
-            #- dbt_expectations.expect_column_values_to_not_be_null
+            - dbt_expectations.expect_column_values_to_not_be_null
         - name: account_shipping_country
         - name: account_created_date
         - name: account_last_modified_date
