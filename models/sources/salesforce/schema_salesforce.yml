@@ -26,7 +26,7 @@ models:
         - name: account_billing_postal_code
           description: Account billing postal code
           tests:
-            #- dbt_expectations.expect_column_values_to_not_be_null
+            - dbt_expectations.expect_column_values_to_not_be_null
         - name: account_billing_country
         - name: account_shipping_street
         - name: account_shipping_city
